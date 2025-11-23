@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from "bcryptjs"
 import { User } from '../models/user.model.js';
 import { generateToken, generateRefreshToken, verifyRefreshToken } from '../utils/jwt.util.js';
 import { z } from 'zod';

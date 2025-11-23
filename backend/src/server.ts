@@ -9,8 +9,8 @@ import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 import roomRoutes from './routes/room.routes.js';
 import messageRoutes from './routes/message.routes.js';
-import { initializeSocket } from './socket/socket.handler.js';
 import { errorHandler } from './middleware/error.middleware.js';
+import { initializeSocket } from './socket/socket.handler.js';
 
 dotenv.config();
 
