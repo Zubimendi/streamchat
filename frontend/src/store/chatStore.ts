@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { type Room, type Message } from '../types';
+import { type Room, type Message, type User } from '../types';
 
 interface ChatState {
   rooms: Room[];
@@ -23,6 +23,9 @@ interface ChatState {
   
   addOnlineUser: (userId: string) => void;
   removeOnlineUser: (userId: string) => void;
+
+  addMember: (user: User) => void;
+  removeMember: (userId: string) => void;
 }
 
 export const useChatStore = create<ChatState>((set) => ({
@@ -36,7 +39,17 @@ export const useChatStore = create<ChatState>((set) => ({
   
   addRoom: (room) => set((state) => ({ rooms: [...state.rooms, room] })),
   
-  setCurrentRoom: (room) => set({ currentRoom: room }),
+  setCurrentRoom: (room) => set((state) => {
+    const onlineUsers = new Set<string>();
+    if (room) {
+      room.members.forEach((member) => {
+        if (member.status === 'online') {
+          onlineUsers.add(member.id);
+        }
+      });
+    }
+    return { currentRoom: room, onlineUsers };
+  }),
 
   setMessages: (roomId, messages) =>
     set((state) => ({
@@ -100,5 +113,34 @@ export const useChatStore = create<ChatState>((set) => ({
       const newSet = new Set(state.onlineUsers);
       newSet.delete(userId);
       return { onlineUsers: newSet };
+    }),
+
+  addMember: (user) =>
+    set((state) => {
+      if (!state.currentRoom) return {};
+      // Check if member already exists
+      if (state.currentRoom.members.some((m) => m.id === user.id)) return {};
+      
+      const members = [...state.currentRoom.members, user];
+      const onlineUsers = new Set(state.onlineUsers);
+      if (user.status === 'online') {
+        onlineUsers.add(user.id);
+      }
+      return {
+        currentRoom: { ...state.currentRoom, members },
+        onlineUsers,
+      };
+    }),
+
+  removeMember: (userId) =>
+    set((state) => {
+      if (!state.currentRoom) return {};
+      const members = state.currentRoom.members.filter((m) => m.id !== userId);
+      const onlineUsers = new Set(state.onlineUsers);
+      onlineUsers.delete(userId);
+      return {
+        currentRoom: { ...state.currentRoom, members },
+        onlineUsers,
+      };
     }),
 }));

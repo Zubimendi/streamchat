@@ -52,7 +52,18 @@ const userSchema = new Schema<IUser>({
     default: Date.now
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  toJSON: {
+    virtuals: true,
+    transform: function (doc, ret) {
+      ret.id = ret._id;
+      delete ret._id;
+      delete ret.__v;
+      delete ret.password;
+      return ret;
+    }
+  },
+  toObject: { virtuals: true }
 });
 
 

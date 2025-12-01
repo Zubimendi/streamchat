@@ -153,3 +153,28 @@ export const logout = async (req: Request, res: Response) => {
   // In a real app, you'd blacklist the token here
   res.json({ message: 'Logged out successfully' });
 };
+
+export const getMe = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).userId;
+    
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar,
+        bio: user.bio,
+        status: user.status
+      }
+    });
+  } catch (error) {
+    console.error('Get me error:', error);
+    res.status(500).json({ error: 'Failed to fetch user' });
+  }
+};

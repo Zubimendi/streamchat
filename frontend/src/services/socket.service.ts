@@ -7,6 +7,10 @@ class SocketService {
   private socket: Socket | null = null;
 
   connect(token: string) {
+    if (this.socket) {
+      return this.socket;
+    }
+
     this.socket = io(SOCKET_URL, {
       auth: { token },
     });
@@ -128,6 +132,14 @@ class SocketService {
 
   onUserOffline(callback: (data: any) => void) {
     this.socket?.on('user_offline', callback);
+  }
+
+  onUserJoined(callback: (data: any) => void) {
+    this.socket?.on('user_joined', callback);
+  }
+
+  onUserLeft(callback: (data: any) => void) {
+    this.socket?.on('user_left', callback);
   }
 
   // Remove listeners

@@ -57,13 +57,13 @@ export default function ChatArea({ roomId }: ChatAreaProps) {
 
   if (!currentRoom) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-background-light dark:bg-background-dark">
-        <div className="text-center">
-          <Hash className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-600 dark:text-gray-400 mb-2">
+      <div className="flex-1 flex items-center justify-center bg-transparent">
+        <div className="text-center p-8 bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 shadow-xl">
+          <Hash className="w-16 h-16 text-white/60 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-white mb-2">
             Welcome to StreamChat
           </h2>
-          <p className="text-gray-500 dark:text-gray-500">
+          <p className="text-white/70">
             Select a room to start chatting
           </p>
         </div>
@@ -74,22 +74,22 @@ export default function ChatArea({ roomId }: ChatAreaProps) {
   const roomMessages = messages[currentRoom.id] || [];
 
   return (
-    <div className="flex-1 flex flex-col bg-background-light dark:bg-background-dark">
+    <div className="flex-1 flex flex-col bg-transparent">
       {/* Header */}
-      <div className="h-16 bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark flex items-center justify-between px-4">
+      <div className="h-16 bg-white/10 backdrop-blur-lg border-b border-white/20 flex items-center justify-between px-4">
         <div className="flex items-center space-x-3">
           <button
             onClick={toggleSidebar}
-            className="p-2 hover:bg-background-light dark:hover:bg-background-dark rounded-lg transition"
+            className="p-2 hover:bg-white/10 rounded-lg transition"
           >
-            <Menu className="w-5 h-5 text-text-light dark:text-text-dark" />
+            <Menu className="w-5 h-5 text-white" />
           </button>
-          <Hash className="w-5 h-5 text-gray-400" />
+          <Hash className="w-5 h-5 text-white/60" />
           <div>
-            <h2 className="font-bold text-text-light dark:text-text-dark">
+            <h2 className="font-bold text-white">
               {currentRoom.name}
             </h2>
-            <p className="text-xs text-text-secondary-light dark:text-text-secondary-dark">
+            <p className="text-xs text-white/70">
               {currentRoom.description || 'No description'}
             </p>
           </div>
@@ -97,10 +97,10 @@ export default function ChatArea({ roomId }: ChatAreaProps) {
 
         <button
           onClick={toggleMemberList}
-          className="flex items-center space-x-2 px-3 py-2 hover:bg-background-light dark:hover:bg-background-dark rounded-lg transition"
+          className="flex items-center space-x-2 px-3 py-2 hover:bg-white/10 rounded-lg transition"
         >
-          <Users className="w-5 h-5 text-gray-400" />
-          <span className="text-sm text-text-light dark:text-text-dark">
+          <Users className="w-5 h-5 text-white/60" />
+          <span className="text-sm text-white">
             {currentRoom.members.length}
           </span>
         </button>

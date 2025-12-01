@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import api from '../../services/api';
 import toast from 'react-hot-toast';
@@ -37,16 +38,16 @@ export default function CreateRoomModal({ onClose, onCreated }: CreateRoomModalP
     }
   };
 
-  return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-surface-dark rounded-xl shadow-2xl w-full max-w-md">
-        <div className="flex items-center justify-between p-4 border-b border-border-light dark:border-border-dark">
-          <h2 className="text-xl font-bold text-text-light dark:text-text-dark">
+  return createPortal(
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[100]">
+      <div className="bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl w-full max-w-md border border-white/20">
+        <div className="flex items-center justify-between p-4 border-b border-white/20">
+          <h2 className="text-xl font-bold text-white">
             Create Room
           </h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-background-light dark:hover:bg-background-dark rounded-lg transition"
+            className="p-2 hover:bg-white/10 rounded-lg transition text-white/70 hover:text-white"
           >
             <X className="w-5 h-5" />
           </button>
@@ -54,7 +55,7 @@ export default function CreateRoomModal({ onClose, onCreated }: CreateRoomModalP
 
         <div className="p-6 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-text-light dark:text-text-dark mb-2">
+            <label className="block text-sm font-medium text-white/80 mb-2">
               Room Name
             </label>
             <input
@@ -62,12 +63,12 @@ export default function CreateRoomModal({ onClose, onCreated }: CreateRoomModalP
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="general"
-              className="w-full px-4 py-2 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-2 rounded-lg border border-white/20 bg-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/50"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-light dark:text-text-dark mb-2">
+            <label className="block text-sm font-medium text-white/80 mb-2">
               Description
             </label>
             <textarea
@@ -75,31 +76,31 @@ export default function CreateRoomModal({ onClose, onCreated }: CreateRoomModalP
               onChange={(e) => setDescription(e.target.value)}
               placeholder="What's this room about?"
               rows={3}
-              className="w-full px-4 py-2 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+              className="w-full px-4 py-2 rounded-lg border border-white/20 bg-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/50 resize-none"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text-light dark:text-text-dark mb-2">
+            <label className="block text-sm font-medium text-white/80 mb-2">
               Room Type
             </label>
             <div className="flex space-x-4">
               <button
                 onClick={() => setType('public')}
-                className={`flex-1 py-2 px-4 rounded-lg border-2 transition ${
+                className={`flex-1 py-2 px-4 rounded-lg border-2 transition font-medium ${
                   type === 'public'
-                    ? 'border-primary bg-primary/10 text-primary'
-                    : 'border-border-light dark:border-border-dark text-text-secondary-light dark:text-text-secondary-dark'
+                    ? 'border-white bg-white text-primary'
+                    : 'border-white/20 text-white/60 hover:bg-white/10 hover:text-white'
                 }`}
               >
                 Public
               </button>
               <button
                 onClick={() => setType('private')}
-                className={`flex-1 py-2 px-4 rounded-lg border-2 transition ${
+                className={`flex-1 py-2 px-4 rounded-lg border-2 transition font-medium ${
                   type === 'private'
-                    ? 'border-primary bg-primary/10 text-primary'
-                    : 'border-border-light dark:border-border-dark text-text-secondary-light dark:text-text-secondary-dark'
+                    ? 'border-white bg-white text-primary'
+                    : 'border-white/20 text-white/60 hover:bg-white/10 hover:text-white'
                 }`}
               >
                 Private
@@ -110,12 +111,13 @@ export default function CreateRoomModal({ onClose, onCreated }: CreateRoomModalP
           <button
             onClick={handleCreate}
             disabled={loading}
-            className="w-full py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition disabled:opacity-50"
+            className="w-full py-3 bg-white text-primary rounded-lg font-bold hover:bg-white/90 transition disabled:opacity-50 shadow-lg mt-2"
           >
             {loading ? 'Creating...' : 'Create Room'}
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

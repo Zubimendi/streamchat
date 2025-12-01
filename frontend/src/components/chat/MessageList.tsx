@@ -41,20 +41,20 @@ export default function MessageList({ messages, loading }: MessageListProps) {
           >
             <div className={`max-w-[70%] ${isOwnMessage ? 'items-end' : 'items-start'} flex flex-col`}>
               {!isOwnMessage && (
-                <span className="text-xs font-medium text-text-secondary-light dark:text-text-secondary-dark mb-1">
+                <span className="text-xs font-medium text-white/70 mb-1">
                   {message.senderId.username}
                 </span>
               )}
               <div
                 className={`px-4 py-2 rounded-2xl ${
                   isOwnMessage
-                    ? 'bg-primary text-white'
-                    : 'bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark'
+                    ? 'bg-primary text-white shadow-lg'
+                    : 'bg-white/20 backdrop-blur-sm text-white border border-white/10'
                 }`}
               >
                 <p className="break-words">{message.content}</p>
               </div>
-              <span className="text-xs text-text-secondary-light dark:text-text-secondary-dark mt-1">
+              <span className="text-xs text-white/50 mt-1">
                 {formatDistanceToNow(new Date(message.createdAt), { addSuffix: true })}
                 {message.edited && ' (edited)'}
               </span>

@@ -9,8 +9,12 @@ import ChatPage from './pages/ChatPage';
 import LandingPage from './pages/LandingPage';
 
 function App() {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, checkAuth } = useAuthStore();
   const { theme } = useUIStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     // Apply theme on mount

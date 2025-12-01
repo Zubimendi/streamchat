@@ -11,9 +11,10 @@ interface AuthState {
   register: (username: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   setUser: (user: User | null) => void;
+  checkAuth: () => Promise<void>;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   user: null,
   isAuthenticated: false,
   isLoading: false,
@@ -54,5 +55,22 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   setUser: (user) => {
     set({ user, isAuthenticated: !!user });
+  },
+
+  checkAuth: async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return;
+    }
+
+    try {
+      const user = await authService.getMe();
+      set({ user, isAuthenticated: true });
+      socketService.connect(token);
+    } catch (error) {
+      console.error('Check auth error:', error);
+      // If check auth fails (e.g. invalid token), logout to clear state
+      get().logout();
+    }
   },
 }));

@@ -35,4 +35,9 @@ export const authService = {
     localStorage.setItem('refreshToken', data.refreshToken);
     return data.token;
   },
+
+  getMe: async (): Promise<User> => {
+    const { data } = await api.get('/auth/me');
+    return data.user;
+  },
 };

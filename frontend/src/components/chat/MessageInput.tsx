@@ -58,13 +58,13 @@ export default function MessageInput({ roomId }: MessageInputProps) {
   };
 
   return (
-    <div className="p-4 bg-surface-light dark:bg-surface-dark border-t border-border-light dark:border-border-dark">
+    <div className="p-4 bg-white/10 backdrop-blur-lg border-t border-white/20">
       <div className="flex items-end space-x-2">
-        <button className="p-2 hover:bg-background-light dark:hover:bg-background-dark rounded-lg transition">
-          <Paperclip className="w-5 h-5 text-gray-400" />
+        <button className="p-2 hover:bg-white/10 rounded-lg transition">
+          <Paperclip className="w-5 h-5 text-white/60 hover:text-white" />
         </button>
 
-        <div className="flex-1 bg-background-light dark:bg-background-dark rounded-2xl border border-border-light dark:border-border-dark">
+        <div className="flex-1 bg-white/10 rounded-2xl border border-white/20 focus-within:ring-2 focus-within:ring-white/30 transition">
           <textarea
             value={message}
             onChange={(e) => {
@@ -74,19 +74,19 @@ export default function MessageInput({ roomId }: MessageInputProps) {
             onKeyDown={handleKeyDown}
             placeholder="Type a message..."
             rows={1}
-            className="w-full px-4 py-3 bg-transparent text-text-light dark:text-text-dark focus:outline-none resize-none"
+            className="w-full px-4 py-3 bg-transparent text-white placeholder-white/50 focus:outline-none resize-none"
             style={{ maxHeight: '120px' }}
           />
         </div>
 
-        <button className="p-2 hover:bg-background-light dark:hover:bg-background-dark rounded-lg transition">
-          <Smile className="w-5 h-5 text-gray-400" />
+        <button className="p-2 hover:bg-white/10 rounded-lg transition">
+          <Smile className="w-5 h-5 text-white/60 hover:text-white" />
         </button>
 
         <button
           onClick={handleSend}
           disabled={!message.trim()}
-          className="p-3 bg-primary text-white rounded-full hover:bg-primary/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="p-3 bg-white text-primary rounded-full hover:bg-white/90 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
         >
           <Send className="w-5 h-5" />
         </button>
