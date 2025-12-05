@@ -62,7 +62,7 @@ export default function RegisterPage() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-white/30 bg-white/20 text-white placeholder-white/60 focus:ring-2 focus:ring-white/50 focus:border-transparent backdrop-blur-sm transition"
+              className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border-none outline-none focus:outline-none focus:ring-0 backdrop-blur-sm transition"
               placeholder="johndoe"
             />
           </div>
@@ -75,7 +75,7 @@ export default function RegisterPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-white/30 bg-white/20 text-white placeholder-white/60 focus:ring-2 focus:ring-white/50 focus:border-transparent backdrop-blur-sm transition"
+              className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border-none outline-none focus:outline-none focus:ring-0 backdrop-blur-sm transition"
               placeholder="your@email.com"
             />
           </div>
@@ -89,13 +89,13 @@ export default function RegisterPage() {
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-white/30 bg-white/20 text-white placeholder-white/60 focus:ring-2 focus:ring-white/50 focus:border-transparent backdrop-blur-sm transition pr-12"
+                className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border-none outline-none focus:outline-none focus:ring-0 backdrop-blur-sm transition pr-12"
                 placeholder="••••••••"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition bg-transparent border-none p-1 focus:outline-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent border-none p-1 focus:outline-none"
               >
                 {showPassword ? (
                   <EyeOff className="w-5 h-5" color='#fff' />
@@ -121,7 +121,7 @@ export default function RegisterPage() {
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition bg-transparent border-none p-1 focus:outline-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent border-none p-1 focus:outline-none"
               >
                 {showConfirmPassword ? (
                   <EyeOff className="w-5 h-5" />
