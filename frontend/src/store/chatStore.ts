@@ -39,7 +39,7 @@ export const useChatStore = create<ChatState>((set) => ({
   
   addRoom: (room) => set((state) => ({ rooms: [...state.rooms, room] })),
   
-  setCurrentRoom: (room) => set((state) => {
+  setCurrentRoom: (room) => set(() => {
     const onlineUsers = new Set<string>();
     if (room) {
       room.members.forEach((member) => {

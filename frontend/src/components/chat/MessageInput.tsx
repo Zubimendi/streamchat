@@ -9,7 +9,7 @@ interface MessageInputProps {
 export default function MessageInput({ roomId }: MessageInputProps) {
   const [message, setMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const typingTimeoutRef = useRef<NodeJS.Timeout>();
+  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     return () => {
