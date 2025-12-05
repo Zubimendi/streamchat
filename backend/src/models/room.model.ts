@@ -52,10 +52,11 @@ const roomSchema = new Schema<IRoom>({
   toJSON: {
     virtuals: true,
     transform: function (doc, ret) {
-      ret.id = ret._id;
-      delete ret._id;
-      delete ret.__v;
-      return ret;
+      const retJson = ret as any;
+      retJson.id = ret._id;
+      delete retJson._id;
+      delete retJson.__v;
+      return retJson;
     }
   },
   toObject: { virtuals: true }

@@ -56,11 +56,12 @@ const userSchema = new Schema<IUser>({
   toJSON: {
     virtuals: true,
     transform: function (doc, ret) {
-      ret.id = ret._id;
-      delete ret._id;
-      delete ret.__v;
-      delete ret.password;
-      return ret;
+      const retJson = ret as any;
+      retJson.id = ret._id;
+      delete retJson._id;
+      delete retJson.__v;
+      delete retJson.password;
+      return retJson;
     }
   },
   toObject: { virtuals: true }
